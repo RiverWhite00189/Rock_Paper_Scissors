@@ -24,40 +24,47 @@ let humanScore = 0;
 let computerScore = 0;
 
 function playRound(humanChoice, computerChoice) {
+    const result = document.createElement("div")
     let isWin = false;
+
     humanChoice = humanChoice.toLowerCase();
     computerChoice = computerChoice.toLowerCase();
     if (humanChoice == computerChoice) {
-        console.log("You tie! You both chose " + humanChoice);
+        result.textContent = "You tie! You both chose " + humanChoice;
         computerScore--;
     } else if (humanChoice == "rock") {
         if (computerChoice == "paper") {
-            console.log("You lose. Paper beats Rock.");
+            result.textContent = "You lose. Paper beats Rock.";
         } else {
-            console.log("You win! Rock beats Scissor");
+            result.textContent = "You win! Rock beats Scissor";
             isWin = true;
         }
     } else if (humanChoice == "paper") {
         if (computerChoice == "scissor") {
-            console.log("You lose. Scissor beats Paper.");
+            result.textContent = "You lose. Scissor beats Paper.";
         } else {
-            console.log("You win! Paper beats Rock");
+            result.textContent = "You win! Paper beats Rock";
             isWin = true;
         }
     } else if (humanChoice == "scissor") {
         if (computerChoice == "rock") {
-            console.log("You lose. Rock beats Scissor.")
+            result.textContent = "You lose. Rock beats Scissor."
         } else {
-            console.log("You win! Scissor beats Paper")
+            result.textContent = "You win! Scissor beats Paper"
             isWin = true;
         }
     }
 
+    const results = document.querySelector("#results");
+    results.appendChild(result)
+    
     if (isWin) {
         humanScore++;
     } else {
         computerScore++;
     }
+
+
 }
 
 function playGame() {
@@ -74,4 +81,11 @@ function playGame() {
     }
 }
 
-playGame();
+//playGame();
+
+let buttons = document.querySelector("#buttons");
+buttons.addEventListener("click", (e) => {
+    let choice = e.target.id
+    playRound(choice, getComputerChoice())
+
+});
