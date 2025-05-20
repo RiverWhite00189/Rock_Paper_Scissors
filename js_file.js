@@ -23,6 +23,19 @@ function getHumanChoice() {
 let humanScore = 0;
 let computerScore = 0;
 
+let score = document.querySelector("#score")
+score.textContent = humanScore + " - " + computerScore;
+
+let winner = document.querySelector("#winner");
+function isWinner() {
+    
+    if (humanScore == 5) {
+        winner.textContent = "You Win!!";
+    } else if (5 == computerScore) {
+        winner.textContent = "You Lose...";
+    }
+}
+
 function playRound(humanChoice, computerChoice) {
     const result = document.createElement("div")
     let isWin = false;
@@ -64,22 +77,11 @@ function playRound(humanChoice, computerChoice) {
         computerScore++;
     }
 
+    score.textContent = humanScore + " - " + computerScore;
 
+    isWinner();
 }
 
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        playRound(getHumanChoice(),getComputerChoice());
-    }
-    
-    if (humanScore > computerScore) {
-        console.log("You Win!!")
-    } else if (humanScore < computerScore) {
-        console.log("You Lose...");
-    } else {
-        console.log("Woah! A Tie!");
-    }
-}
 
 //playGame();
 
@@ -89,3 +91,5 @@ buttons.addEventListener("click", (e) => {
     playRound(choice, getComputerChoice())
 
 });
+
+
